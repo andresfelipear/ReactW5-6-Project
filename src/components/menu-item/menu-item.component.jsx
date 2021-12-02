@@ -1,20 +1,22 @@
-import React from 'react';
+import React from 'react'
 
-import './menu-item.styles.scss';
+// import './menu-item.styles.scss';
+import {
+  MenuItemContainer,
+  BackgroundImageContainer,
+  ContentContainer,
+  ContentTitle,
+  ContentSubtitle,
+} from './menu-item.styles'
 
-const MenuItem = ({ title, imageUrl, size, className }) => (
-  <div className={`${size} menu-item ${className}`}>
-    <div
-      className='background-image'
-      style={{
-        backgroundImage: `url(${imageUrl})`
-      }}
-    />
-    <div className='content'>
-      <h1 className='title'>{title.toUpperCase()}</h1>
-      <span className='subtitle'>SHOP NOW</span>
-    </div>
-  </div>
-);
+const MenuItem = ({ title, imageUrl, size }) => (
+  <MenuItemContainer size={size} >
+    <BackgroundImageContainer imageUrl={imageUrl} />
+    <ContentContainer>
+      <ContentTitle>{title.toUpperCase()}</ContentTitle>
+      <ContentSubtitle>SHOP NOW</ContentSubtitle>
+    </ContentContainer>
+  </MenuItemContainer>
+)
 
-export default MenuItem;
+export default MenuItem
