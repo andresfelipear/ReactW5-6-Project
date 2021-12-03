@@ -1,13 +1,13 @@
 import React from 'react';
+import { useSelector } from 'react-redux'
 
 // import './directory.styles.scss';
 import { DirectoryMenuContainer } from './directory.styles'
-import { directory } from 'assets/data/directory'
 
 import MenuItem from '../menu-item/menu-item.component';
-class Directory extends React.Component {
-
-  render() {
+const Directory = () => {
+  const directory = useSelector(state => state.directory)
+  console.log(directory);
     return (
       <DirectoryMenuContainer>
         {directory.sections.map(({ title, imageUrl, id, size }) => (
@@ -15,7 +15,6 @@ class Directory extends React.Component {
         ))}
       </DirectoryMenuContainer>
     );
-  }
 }
 
 export default Directory;

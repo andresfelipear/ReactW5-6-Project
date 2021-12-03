@@ -10,9 +10,9 @@ import {
 } from './menu-item.styles'
 
 const MenuItem = ({ title, imageUrl, size }) => (
-  <MenuItemContainer size={size} >
-    <BackgroundImageContainer imageUrl={imageUrl} />
-    <ContentContainer>
+  <MenuItemContainer size={size} id={title} >
+    <BackgroundImageContainer imageUrl={imageUrl} id='bgImage' />
+    <ContentContainer id='content'>
       <ContentTitle>{title.toUpperCase()}</ContentTitle>
       <ContentSubtitle>SHOP NOW</ContentSubtitle>
     </ContentContainer>
