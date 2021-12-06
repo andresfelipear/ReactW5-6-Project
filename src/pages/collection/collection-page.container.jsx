@@ -6,7 +6,6 @@ import WithSpinner from 'hoc/withSpinner/with-spinner.component';
 import CollectionPage from './collection-page.component'
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(ownProps.params.collectionId);
     const { collectionId } = ownProps.params
 
     return { 
@@ -16,7 +15,6 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 // const CollectionPageContainer = WithSpinner(WithRouter(connect(mapStateToProps)(CollectionPage)))
-
 const CollectionPageContainer = compose(
     WithRouter,
     connect(mapStateToProps),
