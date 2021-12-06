@@ -27,6 +27,6 @@ export const firestore = getFirestore(firebaseApp)
 
 const provider = new GoogleAuthProvider()
 provider.setCustomParameters({ prompt: 'select_account' })
-export const signInWithGoogle = () => signInWithPopup(auth, provider)
+export const signInWithGoogle = () => signInWithPopup(auth, provider).then(res => console.log(res))
 
 export default firebaseApp
