@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 
 import {
   SignInContainer,
@@ -18,11 +19,26 @@ const SignIn = () => {
     password: '',
   })
 
-  const handleSubmit = (event) => {
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  console.log(location);
+
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
-    console.log(user)
     // handle with firebase
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, user.email, user.password)
+      
+      if(userCredential){
+        let from = location.state?.from?.pathname || '/'
+        navigate(from, { replace: true })
+      }
+    }catch(error){
+      console.log(error.message);
+    }
   }
 
   const handleChange = (event) => {

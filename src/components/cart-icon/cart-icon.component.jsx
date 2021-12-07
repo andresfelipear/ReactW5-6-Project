@@ -9,8 +9,7 @@ import {
 
 const CartIcon = ({toggleCartHidden}) => {
   const cartItems = useSelector(state => state.cart.cartItems)
-  console.log(cartItems);
-  
+
   return(
   <CartContainer onClick={toggleCartHidden}>
     <ShoppingIcon className='shopping-icon' />

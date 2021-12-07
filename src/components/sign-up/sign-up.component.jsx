@@ -29,7 +29,6 @@ const SignUp = () => {
     // handle with firebase
     try{
       const { user } = await createUserWithEmailAndPassword(auth, email, password)
-      console.log('userObj : ', user);
       await createUserProfileDocument(user, { displayName })
 
       setUser({

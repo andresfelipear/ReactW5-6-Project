@@ -10,8 +10,6 @@ import CollectionItem from 'components/collection-item/collection-item.component
 
 const CollectionPage = ({ collections }) => {
   const { title, items } = collections
-
-  console.log('CP: ', collections);
   return (
     <CollectionPageContainer>
       <CollectionTitle>{title}</CollectionTitle>

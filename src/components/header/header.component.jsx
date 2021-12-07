@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuthStatus } from 'hooks/useAuthStatus'
+import { useNavigate } from 'react-router-dom'
 import { getAuth } from 'firebase/auth'
 
 // import './header.styles.scss';
@@ -10,9 +10,10 @@ import CartIcon from 'components/cart-icon/cart-icon.component';
 import CartDropdown from 'components/cart-dropdown/cart-dropdown.component';
 
 
-const Header = () => {
+const Header = ({loggedIn}) => {
   const [hidden, setHidden] = React.useState(true)
-  const { loggedIn } = useAuthStatus()
+  
+  const navigate = useNavigate()
   const auth = getAuth()
 
   const toggleCartHidden = () => {
@@ -31,7 +32,7 @@ const Header = () => {
       </OptionLink>
       {
         loggedIn? 
-        (<OptionLink as='div' onClick={() => auth.signOut()}>SIGN OUT</OptionLink>) 
+        (<OptionLink as='div' onClick={() => {auth.signOut();navigate('/')}}>SIGN OUT</OptionLink>) 
         : 
         (<OptionLink to='/signin'>SIGN IN</OptionLink>)
       }

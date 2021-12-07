@@ -3,7 +3,6 @@ import { useAuthStatus } from 'hooks/useAuthStatus'
 
 const PrivateRoute = ({ children }) => {
     const location = useLocation()
-    console.log(location);
     const { loggedIn, checkingStatus } = useAuthStatus()
 
     if(checkingStatus){

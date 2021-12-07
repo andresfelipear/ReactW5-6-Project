@@ -1,5 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { useAuthStatus } from 'hooks/useAuthStatus'
 
 import './App.scss'
 
@@ -10,9 +11,10 @@ import SignInAndSignUp from 'pages/sign-in-and-sign-up/sign-in-and-sign-up.compo
 import PrivateRoute from 'components/routes/PrivateRoute.route'
 
 function App() {
+  const { loggedIn } = useAuthStatus()
   return (
     <div className='App'>
-      <Header />
+      <Header loggedIn={loggedIn} />
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/shop/*' element={
