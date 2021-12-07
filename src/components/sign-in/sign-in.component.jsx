@@ -22,8 +22,6 @@ const SignIn = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  console.log(location);
-
   const handleSubmit = async (event) => {
     event.preventDefault()
 

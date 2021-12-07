@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 // import './cart-dropdown.styles.scss';
 import {
@@ -12,7 +13,7 @@ import CartItem from '../cart-item/cart-item.component';
 
 
 const CartDropdown = () => {
-  
+  const navigate = useNavigate()
   const cartItems = useSelector(state => state.cart.cartItems)
 
   return(
@@ -22,7 +23,7 @@ const CartDropdown = () => {
         <CartItem key={cartItem.id} item={cartItem} />
       ))}
     </CartItemsContainer>
-    <CartDropdownButton>GO TO CHECKOUT</CartDropdownButton>
+    <CartDropdownButton onClick={() => { navigate('/checkout') }} >GO TO CHECKOUT</CartDropdownButton>
   </CartDropdownContainer>
 )};
 
