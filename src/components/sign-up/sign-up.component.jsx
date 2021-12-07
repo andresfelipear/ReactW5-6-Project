@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth'
 
 import { SignUpContainer, SignUpTitle } from './sign-up.styles'
 
 import CustomButton from 'components/custom-button/custom-button.component'
 import FormInput from 'components/form-input/form-input.component'
+import { createUserProfileDocument } from 'firebase/firebase.util'
 
 const SignUp = () => {
   const [user, setUser] = useState({
@@ -12,8 +14,9 @@ const SignUp = () => {
     password: '',
     confirmPassword: '',
   })
-
-  const handleSubmit = (event) => {
+  const auth = getAuth()
+  
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     const { displayName, email, password, confirmPassword } = user
@@ -24,6 +27,20 @@ const SignUp = () => {
     }
 
     // handle with firebase
+    try{
+      const { user } = await createUserWithEmailAndPassword(auth, email, password)
+      console.log('userObj : ', user);
+      await createUserProfileDocument(user, { displayName })
+
+      setUser({
+        displayName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+      })
+    }catch(error){
+      console.log(error);
+    }
   }
 
   const handleChange = (event) => {

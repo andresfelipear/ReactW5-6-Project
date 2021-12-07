@@ -1,11 +1,17 @@
 import { useLocation, Navigate } from 'react-router-dom'
+import { useAuthStatus } from 'hooks/useAuthStatus'
 
 const PrivateRoute = ({ children }) => {
     const location = useLocation()
-    const currentUser = null //from useSelector (redux state)
+    console.log(location);
+    const { loggedIn, checkingStatus } = useAuthStatus()
 
-    if(!currentUser){
-        return <Navigate to="/signin" />
+    if(checkingStatus){
+        return <h3>Loading.....</h3>
+    }
+    
+    if(!loggedIn){
+        return <Navigate to="/signin" state={{ from: location }} />
     }   
 
     return children

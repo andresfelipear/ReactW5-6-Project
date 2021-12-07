@@ -1,5 +1,6 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { useAuthStatus } from 'hooks/useAuthStatus'
+import { getAuth } from 'firebase/auth'
 
 // import './header.styles.scss';
 import {HeaderContainer,LogoContainer,OptionContainer,OptionLink} from './header.styles'
@@ -11,6 +12,8 @@ import CartDropdown from 'components/cart-dropdown/cart-dropdown.component';
 
 const Header = () => {
   const [hidden, setHidden] = React.useState(true)
+  const { loggedIn } = useAuthStatus()
+  const auth = getAuth()
 
   const toggleCartHidden = () => {
     setHidden(prevState => !prevState)
@@ -26,10 +29,12 @@ const Header = () => {
       <OptionLink to='/shop'>
         SHOP
       </OptionLink>
-      <OptionLink to='/signin'>
-        SIGN IN
-      </OptionLink>
-
+      {
+        loggedIn? 
+        (<OptionLink as='div' onClick={() => auth.signOut()}>SIGN OUT</OptionLink>) 
+        : 
+        (<OptionLink to='/signin'>SIGN IN</OptionLink>)
+      }
       <CartIcon toggleCartHidden={toggleCartHidden} />
     </OptionContainer>
     {hidden ? null : <CartDropdown />}
