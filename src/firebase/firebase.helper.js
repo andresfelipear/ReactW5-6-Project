@@ -36,3 +36,8 @@ export const addCollectionAndDocuments = async (
 
   await batch.commit()
 }
+
+export const addDirectoryDocuments = async (collectionKey, objectsToAdd) => {
+  const directoryRef = doc(collection(db, collectionKey))
+  await setDoc(directoryRef, objectsToAdd)
+}

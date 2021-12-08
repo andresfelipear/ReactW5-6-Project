@@ -2,19 +2,19 @@ import { collection, getDocs } from 'firebase/firestore'
 import { db } from 'firebase/firebase.util'
 
 import {
-  UPDATE_COLLECTIONS,
-  FETCH_COLLECTIONS_START,
-  FETCH_COLLECTIONS_SUCCESS,
-  FETCH_COLLECTIONS_FAILURE,
-} from './shop.types'
+  UPDATE_DIRECTORY,
+  FETCH_DIRECTORY_START,
+  FETCH_DIRECTORY_SUCCESS,
+  FETCH_DIRECTORY_FAILURE,
+} from './directory.types'
 
-export const updateCollection = (collectionsMap) => ({
-    type: UPDATE_COLLECTIONS,
-    payload: collectionsMap
+export const updateCollection = (directoryMap) => ({
+    type: UPDATE_DIRECTORY,
+    payload: directoryMap
 })
 
 export const fetchCollectionStart = () => ({
-    type: FETCH_COLLECTIONS_START
+    type: FETCH_DIRECTORY_START
 })
 
 export const fetchCollectionStartAsync = () => {
@@ -28,15 +28,15 @@ export const fetchCollectionStartAsync = () => {
 
             const querySnap = await getDocs(collectionsRef)
 
-            const collectionsMap = []
+            const directoryMap = []
             querySnap.forEach((doc) => {
-                return collectionsMap.push({ 
+                return directoryMap.push({ 
                     id: doc.id,
                     ...doc.data()
                 })
             })
 
-            dispatch(fetchCollectionSuccess(collectionsMap))
+            dispatch(fetchCollectionSuccess(directoryMap))
 
         }catch(error){
             dispatch(fetchCollectionFailure(error.message))
@@ -44,11 +44,11 @@ export const fetchCollectionStartAsync = () => {
     }
 }
 
-export const fetchCollectionSuccess = (collectionsMap) => ({
-    type: FETCH_COLLECTIONS_SUCCESS,
-    payload: collectionsMap
+export const fetchCollectionSuccess = (directoryMap) => ({
+    type: FETCH_DIRECTORY_SUCCESS,
+    payload: directoryMap
 })
 export const fetchCollectionFailure = (errorMessage) => ({
-    type: FETCH_COLLECTIONS_FAILURE,
+    type: FETCH_DIRECTORY_FAILURE,
     payload: errorMessage
 })

@@ -1,6 +1,6 @@
-import { directory } from 'assets/data/directory'
+import DIRECTORY from 'assets/data/directory'
 
-const INITIAL_STATE = directory
+const INITIAL_STATE = DIRECTORY
 
 const directoryReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
