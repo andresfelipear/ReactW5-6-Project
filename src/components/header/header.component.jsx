@@ -1,6 +1,7 @@
-import React, {useState, useEffect, createRef} from 'react'
+import React, { useState, useEffect, createRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { getAuth, signOut } from 'firebase/auth'
+import { useDispatch } from 'react-redux'
 
 // import './header.styles.scss';
 import {
@@ -14,18 +15,20 @@ import logo from 'assets/images/ClothingYa.png'
 import CartIcon from 'components/cart-icon/cart-icon.component'
 import CartDropdown from 'components/cart-dropdown/cart-dropdown.component'
 import { useAuthStatus } from 'hooks/useAuthStatus'
+import { resetCart } from 'redux/cart/cart.actions'
 
 const Header = () => {
   const [hidden, setHidden] = useState(true)
-  
+
   const { loggedIn } = useAuthStatus()
   const navigate = useNavigate()
   const auth = getAuth()
   const ref = createRef()
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const checkIfClickedOutside = e => {
-      if(!hidden && ref.current && !ref.current.contains(e.target)){
+    const checkIfClickedOutside = (e) => {
+      if (!hidden && ref.current && !ref.current.contains(e.target)) {
         setHidden(true)
       }
     }
@@ -54,6 +57,7 @@ const Header = () => {
             as='div'
             onClick={() => {
               signOut(auth)
+              dispatch(resetCart())
               navigate('/')
             }}
           >
