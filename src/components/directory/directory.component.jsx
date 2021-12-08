@@ -8,17 +8,11 @@ import MenuItem from '../menu-item/menu-item.component'
 
 const Directory = () => {
   const directory = useSelector((state) => state.directory)
-  
+  console.log(directory)
   return (
     <DirectoryMenuContainer>
-      {directory.sections.map(({ title, imageUrl, id, size }) => (
-        <MenuItem
-          key={id}
-          title={title}
-          imageUrl={imageUrl}
-          size={size}
-          className={title}
-        />
+      {directory.sections.map(({ id, ...otherProps }) => (
+        <MenuItem key={id} {...otherProps} />
       ))}
     </DirectoryMenuContainer>
   )

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { useAuthStatus } from 'hooks/useAuthStatus'
 
 import './App.scss'
 
@@ -12,10 +11,10 @@ import PrivateRoute from 'components/routes/PrivateRoute.route'
 import CheckoutPage from 'pages/checkout/checkout-page.component'
 
 function App() {
-  const { loggedIn } = useAuthStatus()
+  
   return (
     <div className='App'>
-      <Header loggedIn={loggedIn} />
+      <Header />
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route

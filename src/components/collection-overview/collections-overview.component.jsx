@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { CollectionsOverviewContainer } from './collections-overview.styles'
 
 import CollectionPreview from 'components/collection-preview/collection-preview.component'
-import { addCollectionAndDocuments } from 'firebase/firebase.util'
+import { addCollectionAndDocuments } from 'firebase/firebase.helper'
 
 const CollectionOverview = ({ collectionProps }) => {
     
