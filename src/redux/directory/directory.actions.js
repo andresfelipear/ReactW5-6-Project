@@ -8,47 +8,44 @@ import {
   FETCH_DIRECTORY_FAILURE,
 } from './directory.types'
 
-export const updateCollection = (directoryMap) => ({
-    type: UPDATE_DIRECTORY,
-    payload: directoryMap
+export const updateDirectory = (directoryMap) => ({
+  type: UPDATE_DIRECTORY,
+  payload: directoryMap,
 })
 
-export const fetchCollectionStart = () => ({
-    type: FETCH_DIRECTORY_START
+export const fetchDirectoryStart = () => ({
+  type: FETCH_DIRECTORY_START,
 })
 
-export const fetchCollectionStartAsync = () => {
-    return async(dispatch) => {
+export const fetchDirectoryStartAsync = () => {
+  return async (dispatch) => {
+    try {
+      const dirRef = collection(db, 'directory')
+      dispatch(fetchDirectoryStart())
+      
+      const docSnap = await getDocs(dirRef)
+      
+      const directoryMap = []
+      docSnap.forEach((doc) => {
+        dispatch(fetchDirectorySuccess(doc.data()))
+      })
+      // console.log(directoryMap[0].sections);
+      // console.log(directoryMap[0].sections);
 
-        try{
+      
 
-            const collectionsRef = collection(db, 'collections')
-
-            dispatch(fetchCollectionStart())
-
-            const querySnap = await getDocs(collectionsRef)
-
-            const directoryMap = []
-            querySnap.forEach((doc) => {
-                return directoryMap.push({ 
-                    id: doc.id,
-                    ...doc.data()
-                })
-            })
-
-            dispatch(fetchCollectionSuccess(directoryMap))
-
-        }catch(error){
-            dispatch(fetchCollectionFailure(error.message))
-        }
+    //   dispatch(fetchDirectorySuccess(directoryMap))
+    } catch (error) {
+      dispatch(fetchDirectoryFailure(error.message))
     }
+  }
 }
 
-export const fetchCollectionSuccess = (directoryMap) => ({
-    type: FETCH_DIRECTORY_SUCCESS,
-    payload: directoryMap
+export const fetchDirectorySuccess = (directoryMap) => ({
+  type: FETCH_DIRECTORY_SUCCESS,
+  payload: directoryMap,
 })
-export const fetchCollectionFailure = (errorMessage) => ({
-    type: FETCH_DIRECTORY_FAILURE,
-    payload: errorMessage
+export const fetchDirectoryFailure = (errorMessage) => ({
+  type: FETCH_DIRECTORY_FAILURE,
+  payload: errorMessage,
 })
