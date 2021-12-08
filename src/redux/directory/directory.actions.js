@@ -25,16 +25,9 @@ export const fetchDirectoryStartAsync = () => {
       
       const docSnap = await getDocs(dirRef)
       
-      const directoryMap = []
       docSnap.forEach((doc) => {
         dispatch(fetchDirectorySuccess(doc.data()))
       })
-      // console.log(directoryMap[0].sections);
-      // console.log(directoryMap[0].sections);
-
-      
-
-    //   dispatch(fetchDirectorySuccess(directoryMap))
     } catch (error) {
       dispatch(fetchDirectoryFailure(error.message))
     }
