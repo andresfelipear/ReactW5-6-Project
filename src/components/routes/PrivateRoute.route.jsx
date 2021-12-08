@@ -8,7 +8,8 @@ const PrivateRoute = ({ children }) => {
     if(checkingStatus){
         return <h3>Loading.....</h3>
     }
-    
+    console.log("loggedIn")
+    console.log(loggedIn)
     if(!loggedIn){
         return <Navigate to="/signin" state={{ from: location }} />
     }   

@@ -31,6 +31,7 @@ const SignIn = () => {
       const userCredential = await signInWithEmailAndPassword(auth, user.email, user.password)
       
       if(userCredential){
+        console.log("sesion iniciada correctamente")
         let from = location.state?.from?.pathname || '/'
         navigate(from, { replace: true })
       }

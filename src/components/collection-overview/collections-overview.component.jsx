@@ -11,6 +11,7 @@ const CollectionOverview = ({ collectionProps }) => {
     // useEffect(() => {
     //     addCollectionAndDocuments('collections', collectionProps )
     // }, [])
+    {console.log("chupelo")}
     return(
     <CollectionsOverviewContainer>
         {
