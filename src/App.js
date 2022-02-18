@@ -19,7 +19,7 @@ function App() {
    *
    * Only run this code once
    */
-  // addDirectory()
+  //addDirectory()
   // addShop()
 
   return (
